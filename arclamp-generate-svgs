@@ -132,9 +132,11 @@ function update_svgs_for_existing_logs() {
   local data_dir="$1"
 
   declare -A label_by_fqfn_with_dedicated_svgs=(
-    [EditAction::show]="EditAction"
-    [MediaWiki::doPreOutputCommit]="PreSend"
-    [MediaWiki::doPostOutputShutdown]="PostSend"
+    # Fandom change: Generate dedicated SVGs for RecentChanges and disable other defaults
+    [SpecialRecentChanges::execute]="RecentChanges"
+  #  [EditAction::show]="EditAction"
+  #  [MediaWiki::doPreOutputCommit]="PreSend"
+  #  [MediaWiki::doPostOutputShutdown]="PostSend"
   )
 
   while IFS= read -r -d $'\0' log; do
