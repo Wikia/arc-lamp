@@ -1,0 +1,8 @@
+FROM artifactory.wikia-inc.com/dockerhub/bash:5.2
+
+RUN apk update && apk add perl moreutils bash coreutils tini
+WORKDIR /opt/arclamp
+
+ADD command.sh command.sh
+
+CMD [ "./command.sh" ]

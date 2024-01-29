@@ -1,3 +1,6 @@
+# Docker env
+.env
+
 # Development
 /vendor
 /composer.lock
