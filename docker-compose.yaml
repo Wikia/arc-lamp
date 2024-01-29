@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  arclamp-log:
+    image: artifactory.wikia-inc.com/platform/arclamp-log:latest
+    user: $UID
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile
+    command: ["sh", "-c", "(python arclamp-log.py arclamp-log-dev.yaml) & (python arclamp-log.py arclamp-log-dev-dedicated.yaml)"]
+    volumes:
+      - ./arclamp-log.py:/opt/arclamp/arclamp-log.py
+      - ./arclamp-log-dev.yaml:/opt/arclamp/arclamp-log-dev.yaml
+      - ./arclamp-log-dev-dedicated.yaml:/opt/arclamp/arclamp-log-dev-dedicated.yaml
+      - ./logs-main:/srv/arclamp/logs
+      - ./logs-dedicated:/srv/arclamp/dedicated/logs
+    depends_on:
+      - arclamp-redis
+    networks:
+      - intranet
+
+  arclamp-svg: &arclampsvg
+    image: artifactory.wikia-inc.com/platform/arclamp-svg:latest
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile-svg
+    environment:
+      - ST_AUTH=""
+      - INTERVAL_SECONDS=3600
+    volumes:
+      - ./arclamp-generate-svgs:/opt/arclamp/arclamp-generate-svgs
+      - ./flamegraph.pl:/opt/arclamp/flamegraph.pl
+      - ./logs-main:/srv/arclamp/logs
+      - ./svgs-main:/srv/arclamp/svgs
+    networks:
+      - intranet
+
+  arclamp-dedicated:
+    <<: *arclampsvg
+    volumes:
+      - ./arclamp-generate-svgs:/opt/arclamp/arclamp-generate-svgs
+      - ./flamegraph.pl:/opt/arclamp/flamegraph.pl
+      - ./logs-dedicated:/srv/arclamp/logs
+      - ./svgs-dedicated:/srv/arclamp/svgs
+
+  arclamp-redis:
+    image: artifactory.wikia-inc.com/dockerhub/redis:6.0.9-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - intranet
+
+networks:
+  intranet:
+    name: unified-platform_default

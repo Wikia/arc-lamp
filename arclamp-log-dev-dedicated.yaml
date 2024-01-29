@@ -1,0 +1,12 @@
+base_path: /srv/arclamp/dedicated/logs
+logs:
+  - format: "%Y-%m-%d"
+    period: daily
+    retain: 7
+  - format: "%Y-%m-%d"
+    period: weekly
+    retain: 2
+redis:
+  host: "arclamp-redis"
+  port: 6379
+redis_channel: "arclamp-dedicated"
