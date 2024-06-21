@@ -7,5 +7,5 @@ logs:
     period: daily
     retain: 7
 redis:
-  host: "arclamp-redis"
+  host: "arclamp-log"
   port: 6379
