@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  arclamp-log:
+  arclamp:
     image: artifactory.wikia-inc.com/platform/arclamp-log:latest
     user: $UID
     build:
@@ -15,7 +15,7 @@ services:
       - ./logs-main:/srv/arclamp/logs
       - ./logs-dedicated:/srv/arclamp/dedicated/logs
     depends_on:
-      - arclamp-redis
+      - arclamp-log
     networks:
       - intranet
 
@@ -43,13 +43,16 @@ services:
       - ./logs-dedicated:/srv/arclamp/logs
       - ./svgs-dedicated:/srv/arclamp/svgs
 
-  arclamp-redis:
+  arclamp-log:
     image: artifactory.wikia-inc.com/dockerhub/redis:6.0.9-alpine
     ports:
       - 6379:6379
     networks:
       - intranet
+      - nar-intranet
 
 networks:
+  nar-intranet:
+    name: nar-intranet
   intranet:
     name: unified-platform_default

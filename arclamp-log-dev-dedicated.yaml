@@ -7,6 +7,6 @@ logs:
     period: weekly
     retain: 2
 redis:
-  host: "arclamp-redis"
+  host: "arclamp-log"
   port: 6379
 redis_channel: "arclamp-dedicated"
