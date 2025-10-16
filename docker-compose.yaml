@@ -44,7 +44,7 @@ services:
       - ./svgs-dedicated:/srv/arclamp/svgs
 
   arclamp-log:
-    image: artifactory.wikia-inc.com/dockerhub/redis:6.0.9-alpine
+    image: artifactory.wikia-inc.com/dockerhub-remote/redis:6.2.20-alpine
     ports:
       - 6379:6379
     networks:
