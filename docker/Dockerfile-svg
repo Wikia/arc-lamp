@@ -15,7 +15,7 @@ WORKDIR /opt/arclamp
 
 COPY --from=build /usr/local/cargo/bin/inferno-flamegraph /opt/arclamp/inferno-flamegraph
 COPY arclamp-generate-svgs /opt/arclamp/arclamp-generate-svgs
-COPY command.sh /opt/arclamp/command.sh
+COPY docker/command.sh /opt/arclamp/command.sh
 
 RUN chmod +x \
     /opt/arclamp/inferno-flamegraph \

@@ -22,7 +22,7 @@ services:
   arclamp-svg: &arclampsvg
     image: artifactory.wikia-inc.com/platform/arclamp-svg:latest
     build:
-      context: ./docker/
+      context: .
       dockerfile: Dockerfile-svg
     environment:
       - ST_AUTH=""
