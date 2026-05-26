@@ -1,8 +1,25 @@
+FROM artifactory.wikia-inc.com/dockerhub/rust:1.85-alpine AS build
+
+RUN apk add --no-cache musl-dev
+RUN cargo install inferno --version 0.11.21 --locked
+
 FROM artifactory.wikia-inc.com/dockerhub/bash:5.2
 
-RUN apk update && apk add perl moreutils bash coreutils tini
+RUN apk add --no-cache \
+    bash \
+    coreutils \
+    gzip \
+    moreutils
+
 WORKDIR /opt/arclamp
 
-ADD command.sh command.sh
+COPY --from=build /usr/local/cargo/bin/inferno-flamegraph /opt/arclamp/inferno-flamegraph
+COPY arclamp-generate-svgs /opt/arclamp/arclamp-generate-svgs
+COPY docker/command.sh /opt/arclamp/command.sh
 
-CMD [ "./command.sh" ]
+RUN chmod +x \
+    /opt/arclamp/inferno-flamegraph \
+    /opt/arclamp/arclamp-generate-svgs \
+    /opt/arclamp/command.sh
+
+CMD ["./command.sh"]

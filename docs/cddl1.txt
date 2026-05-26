@@ -1,4 +1,4 @@
-flamegraph.pl was downloaded from https://github.com/brendangregg/FlameGraph
+inferno-flamegraph was built from https://github.com/jonhoo/inferno
 and is licensed under the CDDL license version 1.0.
 
 The remaining files in this distribution are licensed under the Apache

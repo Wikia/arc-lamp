@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Prefer flamegraph.pl in current directory.  If not found, look in PATH.
-flamegraph=`dirname $0`/flamegraph.pl
+# Prefer inferno-flamegraph in current directory. If not found, look in PATH.
+flamegraph="$(dirname "$0")/inferno-flamegraph"
 if [ ! -x "$flamegraph" ]; then
-    flamegraph=`which flamegraph.pl`
+    flamegraph="$(command -v inferno-flamegraph || true)"
     if [ ! -x "$flamegraph" ]; then
-        echo "$0: cannot execute flamegraph.pl" >&2
+        echo "$0: cannot execute inferno-flamegraph" >&2
         exit 1
     fi
 fi
@@ -95,7 +95,7 @@ function update_log_svgs_for_fqfn() {
 
   # Bail if both flamegraphs are already up to date
   if [ -s "$fsvg" ] && [ "$fsvg" -nt "$log" ] && [ -s "$rsvg" ] && [ "$rsvg" -nt "$log" ]; then
-    # If flamegraph.pl crashes, it will leave a 20-byte file behind (T259167).
+    # If inferno-flamegraph crashes, it will leave a 20-byte file behind (T259167).
     # We want those to be re-generated.
     fsize=$(stat -c%s "$fsvg")
     rsize=$(stat -c%s "$rsvg")

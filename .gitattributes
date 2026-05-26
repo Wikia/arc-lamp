@@ -1,6 +1,2 @@
 /.* export-ignore
 /composer.json export-ignore
-
-# This large file will otherwise classify the repo as a Perl project.
-# https://github.com/github/linguist/blob/v7.15.0/docs/overrides.md
-/flamegraph.pl linguist-vendored
