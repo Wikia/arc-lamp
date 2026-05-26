@@ -29,7 +29,6 @@ services:
       - INTERVAL_SECONDS=3600
     volumes:
       - ./arclamp-generate-svgs:/opt/arclamp/arclamp-generate-svgs
-      - ./flamegraph.pl:/opt/arclamp/flamegraph.pl
       - ./logs-main:/srv/arclamp/logs
       - ./svgs-main:/srv/arclamp/svgs
     networks:
@@ -39,7 +38,6 @@ services:
     <<: *arclampsvg
     volumes:
       - ./arclamp-generate-svgs:/opt/arclamp/arclamp-generate-svgs
-      - ./flamegraph.pl:/opt/arclamp/flamegraph.pl
       - ./logs-dedicated:/srv/arclamp/logs
       - ./svgs-dedicated:/srv/arclamp/svgs
 
