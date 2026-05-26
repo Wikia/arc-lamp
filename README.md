@@ -97,7 +97,7 @@ For example:
 
 The `arclamp-generate-svgs` script also removes graphs for which a trace log no longer exists.
 
-Flamegraphs are generated using BJon Gjengset's [inferno](https://github.com/jonhoo/inferno).
+Flamegraphs are generated using Jon Gjengset's [inferno](https://github.com/jonhoo/inferno).
 
 ## Demo
 
